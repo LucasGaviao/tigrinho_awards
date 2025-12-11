@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:tigrinho_awards/database/db_helper.dart';
 import 'package:tigrinho_awards/views/homepage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  sqfliteFfiInit();
+
+  databaseFactory = databaseFactoryFfi;
+
+  await DBHelper().database;
+  
   runApp(const MyApp());
 }
 
