@@ -4,14 +4,14 @@ import '../database/db_helper.dart';
 
 
 
-class GameRepository {
+class categoryGameRepository {
   
-  Future<int> insertGame(CategoryGame categoryGame ) async {
+  Future<int> insert_CatGame(CategoryGame categoryGame ) async {
     
     final db = await DBHelper().database;
 
     return await db.insert(
-      'game',
+      'category_game',
       categoryGame.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace
     );

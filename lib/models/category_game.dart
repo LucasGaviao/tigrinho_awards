@@ -1,7 +1,7 @@
 class CategoryGame {
   final int? id;
-  final int categoryId;
-  final int gameId;
+  final int? categoryId;
+  final int? gameId;
 
   CategoryGame({
     this.id,
