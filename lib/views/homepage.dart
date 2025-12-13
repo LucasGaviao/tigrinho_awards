@@ -115,8 +115,6 @@ class _HomepageState extends State<Homepage> {
                         print("ID: ${game.id} || CategoryId: ${game.categoryId}, || GameId: ${game.gameId}");
                       }
                     }
-                    
-                    
                 },
                 child: Text("Listar todas os jogos com categoria")
             ),
