@@ -54,7 +54,7 @@ class _HomepageState extends State<Homepage> {
                 
                 GameRepository repo = GameRepository(); 
 
-                List<Game> games = await repo.getGames();
+                List<Game> games = await repo.getAllGames();
 
                 if(games.isEmpty){
                   print('Não há jogo cadastrado');
@@ -90,7 +90,7 @@ class _HomepageState extends State<Homepage> {
                     date: "1/1/2025"
                 );
 
-                List<Game> games = await game_repo.getGames();
+                List<Game> games = await game_repo.getAllGames();
                 for (var game in games){
                     if (game.name == "Tigrinho Game"){
                         CategoryGame cat_game = CategoryGame(categoryId: 1, gameId: game.id);
