@@ -43,7 +43,7 @@ class _HomepageState extends State<Homepage> {
 
                 GameRepository repo = GameRepository(); 
 
-                await repo.insertGame(novoJogo);
+                await repo.createGame(novoJogo);
 
                 print("Salvo com sucesso!");
               },
@@ -79,7 +79,7 @@ class _HomepageState extends State<Homepage> {
                     releaseDate: "2025"
                 );
 
-                await game_repo.insertGame(game);
+                await game_repo.createGame(game);
                 
 
 
@@ -94,7 +94,7 @@ class _HomepageState extends State<Homepage> {
                 for (var game in games){
                     if (game.name == "Tigrinho Game"){
                         CategoryGame cat_game = CategoryGame(categoryId: 1, gameId: game.id);
-                        await repo.insertCatGame(cat_game);
+                        await repo.createCatGame(cat_game);
                         print("Salvo");
                         break;
                     }

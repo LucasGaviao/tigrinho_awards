@@ -6,7 +6,7 @@ import 'category_game_repository.dart';
 class GameRepository {
   
   //CREATE
-  Future<int> insertGame(Game game) async {
+  Future<int> createGame(Game game) async {
     
     final db = await DBHelper().database;
 

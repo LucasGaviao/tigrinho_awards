@@ -5,7 +5,7 @@ import '../database/db_helper.dart';
 class CategoryRepository {
   
   //CREATE
-  Future<int> insertCategory(Category category) async {
+  Future<int> createCategory(Category category) async {
     
     final db = await DBHelper().database;
 
