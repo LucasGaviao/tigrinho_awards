@@ -2,11 +2,9 @@ import 'package:sqflite/sqflite.dart';
 import '../models/category_game.dart';
 import '../database/db_helper.dart';
 
-
-
-class categoryGameRepository {
+class CategoryGameRepository {
   
-  Future<int> insert_CatGame(CategoryGame categoryGame ) async {
+  Future<int> insertCatGame(CategoryGame categoryGame ) async {
     
     final db = await DBHelper().database;
 
@@ -15,10 +13,9 @@ class categoryGameRepository {
       categoryGame.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace
     );
-
   }
 
-  Future<List<CategoryGame>> getGames() async {
+  Future<List<CategoryGame>> getCatGames() async {
 
     final db = await DBHelper().database;
 

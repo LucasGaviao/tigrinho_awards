@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/game.dart';
 import '../repositories/game_repository.dart';
 import '../models/category_game.dart'; 
-import '../repositories/game_category_repo.dart';
+import '../repositories/category_game_repository.dart';
 import '../models/category.dart';
 
 class Homepage extends StatefulWidget {
@@ -69,7 +69,7 @@ class _HomepageState extends State<Homepage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                categoryGameRepository repo = categoryGameRepository();
+                CategoryGameRepository repo = CategoryGameRepository();
                 GameRepository game_repo = GameRepository();
 
                 Game game = Game(
@@ -94,7 +94,7 @@ class _HomepageState extends State<Homepage> {
                 for (var game in games){
                     if (game.name == "Tigrinho Game"){
                         CategoryGame cat_game = CategoryGame(categoryId: 1, gameId: game.id);
-                        await repo.insert_CatGame(cat_game);
+                        await repo.insertCatGame(cat_game);
                         print("Salvo");
                         break;
                     }
@@ -105,8 +105,8 @@ class _HomepageState extends State<Homepage> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                    categoryGameRepository repo = categoryGameRepository();
-                    List<CategoryGame> games = await repo.getGames();
+                    CategoryGameRepository repo = CategoryGameRepository();
+                    List<CategoryGame> games = await repo.getCatGames();
                     if(games.isEmpty){
                       print('Não há jogo cadastrado');
                     }

@@ -8,9 +8,6 @@ class CategoryGame {
     required this.categoryId,
     required this.gameId
   });
-
-
-
   
   Map<String, dynamic> toMap(){
     return {
