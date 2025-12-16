@@ -1,25 +1,27 @@
-class User{
+class User {
   final int? id;
   final String name;
   final String email;
   final String? password;
-  final bool role;
+  final int role; // 0 = admin, 1 = common user
 
   User({
     this.id,
     required this.name,
     required this.email,
     this.password,
-    required this.role
+    required this.role,
   });
 
-  Map<String, dynamic> toMap(){
+  bool get isAdmin => role == 0;
+
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
       'email': email,
       'password': password,
-      'role': role
+      'role': role,
     };
   }
 
@@ -32,5 +34,4 @@ class User{
       role: map['role'],
     );
   }
-
 }

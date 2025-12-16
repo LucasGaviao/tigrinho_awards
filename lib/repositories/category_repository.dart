@@ -3,22 +3,47 @@ import '../models/category.dart';
 import '../database/db_helper.dart';
 
 class CategoryRepository {
-  
   //CREATE
+  Future<int> insert(Category category) async {
+    final db = await DBHelper().database;
+    return await db.insert('category', category.toMap());
+  }
+
   Future<int> createCategory(Category category) async {
-    
     final db = await DBHelper().database;
 
     return await db.insert(
       'category',
       category.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   //READ
-  Future<List<Category>> getAllCategories() async {
+  Future<List<Category>> getAll() async {
+    final db = await DBHelper().database;
+    final List<Map<String, dynamic>> maps = await db.query('category');
+    return maps.map((mapa) => Category.fromMap(mapa)).toList();
+  }
 
+  Future<List<Category>> getCategories() async {
+    return await getAll();
+  }
+
+  Future<Category?> getById(int id) async {
+    final db = await DBHelper().database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'category',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (maps.isNotEmpty) {
+      return Category.fromMap(maps.first);
+    }
+    return null;
+  }
+
+  Future<List<Category>> getAllCategories() async {
     final db = await DBHelper().database;
 
     final List<Map<String, dynamic>> maps = await db.query('category');
@@ -27,7 +52,6 @@ class CategoryRepository {
   }
 
   Future<List<Category>> searchCategories(String name) async {
-
     final db = await DBHelper().database;
 
     final List<Map<String, dynamic>> maps = await db.query(
@@ -41,10 +65,9 @@ class CategoryRepository {
 
   //UPDATE
   Future<int> updateCategory(Category category) async {
-
     final db = await DBHelper().database;
 
-    if(category.id == null){
+    if (category.id == null) {
       print('Categoria sem ID');
       return 0;
     }
@@ -59,14 +82,8 @@ class CategoryRepository {
 
   //DELETE
   Future<int> deleteCategory(int id) async {
-
     final db = await DBHelper().database;
 
-    return await db.delete(
-      'category',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    return await db.delete('category', where: 'id = ?', whereArgs: [id]);
   }
-
 }

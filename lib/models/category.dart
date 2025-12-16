@@ -10,21 +10,21 @@ class Category {
     required this.userId,
     required this.title,
     required this.description,
-    required this.date
+    required this.date,
   });
 
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'user_id': userId,
       'title': title,
       'description': description,
-      'date': date
+      'date': date,
     };
   }
 
   factory Category.fromMap(Map<String, dynamic> map) {
-    return Category (
+    return Category(
       id: map['id'],
       userId: map['user_id'],
       title: map['title'],
@@ -32,5 +32,4 @@ class Category {
       date: map['date'],
     );
   }
-  
 }

@@ -1,5 +1,4 @@
-
-import 'package:sqflite/sqflite.dart'; 
+import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DBHelper {
@@ -17,17 +16,12 @@ class DBHelper {
   }
 
   Future<Database> _initDB(String filePath) async {
-
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
     print('Rota: $path');
 
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _createDB,
-    );
+    return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
@@ -36,7 +30,8 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        role INTEGER NOT NULL
       )
     ''');
 
@@ -46,7 +41,7 @@ class DBHelper {
         name VARCHAR NOT NULL
       )
     ''');
-    
+
     await db.execute('''
       CREATE TABLE game(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -99,6 +94,5 @@ class DBHelper {
         FOREIGN KEY(vote_game_id) REFERENCES category_game(game_id)
       ) 
     ''');
-    
   }
 }
