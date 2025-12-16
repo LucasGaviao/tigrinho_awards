@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import '../models/game.dart';
 import '../database/db_helper.dart';
+import 'category_game_repository.dart';
 
 class GameRepository {
   
@@ -26,7 +27,7 @@ class GameRepository {
     return maps.map((mapa) => Game.fromMap(mapa)).toList();
   }
 
-  Future<List<Game>> searchGames(String name) async {
+  Future<List<Game>> searchGamesByName(String name) async {
 
     final db = await DBHelper().database;
 
@@ -38,6 +39,20 @@ class GameRepository {
 
     return maps.map((mapa) => Game.fromMap(mapa)).toList();
   }
+
+  Future<List<Game>> searchGamesById(int id) async {
+
+    final db = await DBHelper().database;
+
+    final List<Map<String, dynamic>> maps = await db.query(
+      'game',
+      where: 'id = ?',   
+      whereArgs: [id],   
+    );
+
+    return maps.map((mapa) => Game.fromMap(mapa)).toList();
+  }
+
 
   //UPDATE
   Future<int> updateGame(Game game) async {
@@ -62,6 +77,10 @@ class GameRepository {
   Future<int> deleteGame(int id) async {
     
     final db = await DBHelper().database;
+
+    final _categoryGameRepo = CategoryGameRepository();
+
+    await _categoryGameRepo.deleteAllCatGameHavingGameId(id);
 
     return await db.delete(
       'game',
