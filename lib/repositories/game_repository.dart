@@ -13,7 +13,6 @@ class GameRepository {
       game.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace
     );
-
   }
 
   Future<List<Game>> getGames() async {
